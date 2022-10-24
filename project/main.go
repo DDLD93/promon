@@ -28,7 +28,7 @@ func main()  {
 			v1.POST("/", route.Create())
 			v1.GET("/", route.GetAll())
 			v1.GET("/:id", route.GetOne())
-			v1.PUT("/:id", route.GetOne())
+			v1.PATCH("/:id", route.GetOne())
 			v1.DELETE("/:id", route.GetOne())
 			// v1.POST("/post", route.FormTest())
 		}
