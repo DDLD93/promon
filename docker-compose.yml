@@ -1,0 +1,38 @@
+version: "3.6"
+services:
+  gateway:
+    build: ./gateway
+    container_name: gateway
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - frontnet
+  project:
+    build: ./project
+    container_name: project
+    restart: always
+    environment:
+      APP_PORT: "${APP_PORT}"
+      DATABASE_HOST: "${DATABASE_HOST}"
+    networks:
+      - frontnet
+  contractor:
+    build: ./contractor
+    container_name: contractor
+    restart: always
+    environment:
+      APP_PORT: "${APP_PORT}"
+      DATABASE_HOST: "${DATABASE_HOST}"
+    networks:
+      - frontnet 
+  mongodb:
+    container_name: mongodb
+    image: mongo:latest
+    restart: always
+    networks:
+      - frontnet
+    volumes:
+      - ${PWD}/volumes/mongo:/data/db       
+networks:
+  frontnet:
